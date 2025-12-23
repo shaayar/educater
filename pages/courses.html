@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E -Learning | Learn by Implementing</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    />
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body class="theme-dark">
+    <!-- Dynamic header -->
+    <div id="site-header"></div>
+
+    <main class="container my-5">
+      <h1 class="mb-4">Our Courses</h1>
+      <p>
+        Explore our wide range of courses designed to help you learn by
+        implementing.
+      </p>
+      <!-- Course Filters -->
+      <section class="container py-4">
+        <h1 class="mb-4">All Courses</h1>
+
+        <div class="d-flex flex-wrap gap-3 mb-4">
+          <select class="form-select w-auto">
+            <option>All Categories</option>
+            <option>Web Development</option>
+            <option>JavaScript</option>
+            <option>Full Stack</option>
+          </select>
+
+          <select class="form-select w-auto">
+            <option>All Levels</option>
+            <option>Beginner</option>
+            <option>Intermediate</option>
+            <option>Advanced</option>
+          </select>
+
+          <select class="form-select w-auto">
+            <option>Sort by</option>
+            <option>Price: Low to High</option>
+            <option>Price: High to Low</option>
+          </select>
+        </div>
+      </section>
+
+      <!-- Static Cards -->
+      <section class="container pb-5">
+  <div class="row g-4">
+
+    <!-- Course Card -->
+    <div class="col-md-6 col-lg-4">
+      <a href="course-detail.html" class="text-decoration-none">
+        <div class="course-card">
+          <img src="https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://d15cw65ipctsrr.cloudfront.net/85/b322ebed824235921710c15744aa83/Image_1200x1200.png?auto=format%2C%20compress%2C%20enhance&dpr=3&w=320&h=180&fit=crop&q=50" class="course-image" />
+
+          <div class="course-meta d-flex justify-content-between mt-2">
+            <span class="course-category">Web Development</span>
+            <span class="course-price">₹2,499</span>
+          </div>
+
+          <span class="course-level">Beginner</span>
+          <h4>Web Development Foundations</h4>
+          <p>Learn HTML, CSS, and JavaScript by building real-world layouts.</p>
+        </div>
+      </a>
+    </div>
+
+    <!-- Repeat cards -->
+  </div>
+</section>
+
+
+      <div id="courses-container"></div>
+    </main>
+
+    <!-- Dynamic footer -->
+    <div id="site-footer"></div>
+
+    <!-- Bootstrap JS -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../script.js"></script>
+  </body>
+</html>

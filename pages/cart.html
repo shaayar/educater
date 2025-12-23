@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E -Learning | Learn by Implementing</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    />
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body class="theme-light">
+
+    <!-- Dynamic header -->
+    <div id="site-header"></div>
+
+    <!-- cart content -->
+    <section class="cart-section">
+      <div class="container py-5">
+        <h2 class="mb-4">Your Shopping Cart</h2>
+        <div class="table-responsive">
+          <table class="table table-bordered align-middle">
+            <thead class="table-light">
+              <tr>
+                <th scope="col">Course</th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Total</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Introduction to Python</td>
+                <td>$49.99</td>
+                <td>1</td>
+                <td>$49.99</td>
+                <td>
+                  <button class="btn btn-danger btn-sm">Remove</button>
+                </td>
+              </tr>
+              <tr>
+                <td>Web Development Basics</td>
+                <td>$59.99</td>
+                <td>1</td>
+                <td>$59.99</td>
+                <td>
+                  <button class="btn btn-danger btn-sm">Remove</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="d-flex justify-content-end">
+          <h4>Total: $109.98</h4>
+        </div>
+        <div class="d-flex justify-content-end mt-3">
+          <button class="btn btn-primary btn-lg">Proceed to Checkout</button>
+        </div>
+      </div>
+    </section>
+    
+
+    <!-- Bootstrap JS -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../script.js"></script>
+  </body>
+</html>
