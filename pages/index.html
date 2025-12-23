@@ -449,6 +449,10 @@
 
       .tab-panel {
         display: none;
+
+        ul{
+          color: var(--text-primary);
+        }
       }
 
       .tab-panel.active {
@@ -466,6 +470,13 @@
         display: flex;
         gap: 1rem;
         align-items: center;
+        height: auto;
+        div{
+          strong{
+            font-size: 1rem;
+            color: var(--text-primary);
+          }
+        }
       }
 
       .instructor .avatar {
@@ -638,7 +649,8 @@
             name: "Aarav Sharma",
             role: "Senior Frontend Engineer",
           },
-          image: "https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://d15cw65ipctsrr.cloudfront.net/85/b322ebed824235921710c15744aa83/Image_1200x1200.png?auto=format%2C%20compress%2C%20enhance&dpr=3&w=320&h=180&fit=crop&q=50",
+          image:
+            "https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://d15cw65ipctsrr.cloudfront.net/85/b322ebed824235921710c15744aa83/Image_1200x1200.png?auto=format%2C%20compress%2C%20enhance&dpr=3&w=320&h=180&fit=crop&q=50",
           previewVideo: "../assets/preview-web.mp4",
           purchased: false,
         },
@@ -662,7 +674,8 @@
             name: "Neha Patel",
             role: "Frontend Developer",
           },
-          image: "https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://d15cw65ipctsrr.cloudfront.net/85/b322ebed824235921710c15744aa83/Image_1200x1200.png?auto=format%2C%20compress%2C%20enhance&dpr=3&w=320&h=180&fit=crop&q=50",
+          image:
+            "https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://d15cw65ipctsrr.cloudfront.net/85/b322ebed824235921710c15744aa83/Image_1200x1200.png?auto=format%2C%20compress%2C%20enhance&dpr=3&w=320&h=180&fit=crop&q=50",
           previewVideo: "../assets/preview-js.mp4",
           purchased: false,
         },
@@ -686,7 +699,8 @@
             name: "Rohit Verma",
             role: "Senior Software Engineer",
           },
-          image: "https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://d15cw65ipctsrr.cloudfront.net/85/b322ebed824235921710c15744aa83/Image_1200x1200.png?auto=format%2C%20compress%2C%20enhance&dpr=3&w=320&h=180&fit=crop&q=50",
+          image:
+            "https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://d15cw65ipctsrr.cloudfront.net/85/b322ebed824235921710c15744aa83/Image_1200x1200.png?auto=format%2C%20compress%2C%20enhance&dpr=3&w=320&h=180&fit=crop&q=50",
           previewVideo: "../assets/preview-fullstack.mp4",
           purchased: false,
         },
@@ -845,7 +859,7 @@
 
     <!-- newsletter -->
     <section class="newsletter-section">
-      <div class="container py-4 text-center">
+      <div class="container py-5 text-center">
         <h2>Join Our Newsletter</h2>
         <p>Get updates, courses, and learning tips straight to your inbox.</p>
 
@@ -928,7 +942,7 @@
                   <div class="tab-panel" id="instructor">
                     <div class="instructor">
                       <div class="avatar"></div>
-                      <div>
+                      <div class="pt-3">
                         <strong>Instructor Name</strong>
                         <p>Senior Developer & Mentor</p>
                       </div>

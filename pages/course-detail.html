@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Course Detail | Educater</title>
+
+  <link rel="stylesheet" href="../style.css" />
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+
+  <style>
+    /* ===============================
+       COURSE DETAIL LAYOUT
+       =============================== */
+
+    .course-layout {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 2rem;
+      padding: 3rem 0;
+    }
+
+    @media (max-width: 992px) {
+      .course-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ===============================
+       LEFT: COURSE CONTENT
+       =============================== */
+
+    .course-content {
+      background-color: var(--bg-page);
+    }
+
+    .course-title {
+      font-size: 2.2rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .course-meta {
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .lesson-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .lesson-item {
+      padding: 1rem 1.2rem;
+      border-radius: 12px;
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      margin-bottom: 0.8rem;
+      opacity: 0.9;
+    }
+
+    .lesson-item.active {
+      border-left: 4px solid var(--accent-color);
+      background-color: rgba(46, 204, 113, 0.08);
+      opacity: 1;
+    }
+
+    .lesson-title {
+      font-weight: 500;
+    }
+
+    .lesson-duration {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* ===============================
+       RIGHT: COURSE SIDEBAR
+       =============================== */
+
+    .course-sidebar {
+      position: sticky;
+      top: 90px;
+      align-self: start;
+    }
+
+    .sidebar-card {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: 18px;
+      padding: 1.4rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .course-preview img {
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+    }
+
+    .course-price {
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .course-stats li {
+      list-style: none;
+      font-size: 0.9rem;
+      margin-bottom: 0.4rem;
+      opacity: 0.85;
+    }
+
+    .instructor {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .instructor-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background-color: #444;
+    }
+
+    .instructor-name {
+      font-weight: 500;
+    }
+
+    /* ===============================
+   LESSON ACCORDION (CUSTOM)
+   =============================== */
+
+.lesson-accordion {
+  background: transparent;
+}
+
+/* Remove default Bootstrap styles */
+.lesson-accordion .accordion-item {
+  background: none;
+  border: none;
+  margin-bottom: 0.8rem;
+}
+
+/* Header button = lesson card */
+.lesson-toggle {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+  color: var(--text-primary);
+  font-weight: 500;
+
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Remove Bootstrap arrow */
+.lesson-toggle::after {
+  display: none;
+}
+
+/* Active header */
+.lesson-toggle:not(.collapsed) {
+  background-color: rgba(46, 204, 113, 0.08);
+  border-left: 4px solid var(--accent-color);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/* Body */
+.lesson-body {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-top: none;
+  border-radius: 0 0 12px 12px;
+  padding: 1rem 1.2rem;
+  color: var(--text-muted);
+}
+
+/* Duration */
+.lesson-duration {
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+/* Hover */
+.lesson-toggle:hover {
+  background-color: var(--bg-surface-soft);
+}
+
+/* Active (open) state */
+.lesson-item .accordion-collapse.show + .accordion-body,
+.lesson-item .accordion-collapse.show {
+  opacity: 1;
+}
+
+.lesson-item .accordion-button:not(.collapsed) {
+  background-color: rgba(46, 204, 113, 0.08);
+  border-left: 4px solid var(--accent-color);
+}
+
+/* Lesson body */
+.lesson-body {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-top: none;
+  border-radius: 0 0 12px 12px;
+  padding: 1rem 1.2rem;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+/* Duration */
+.lesson-duration {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.accordion-button:not(.collapsed) {
+  color: var(--text-primary);
+}
+
+  </style>
+
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body class="theme-dark">
+
+  <!-- Header -->
+  <div id="site-header"></div>
+
+  <main class="container course-layout">
+
+    <!-- LEFT: COURSE CONTENT -->
+    <section class="course-content">
+
+      <h1 class="course-title">Full-Stack Applications</h1>
+      <p class="course-meta">
+        Advanced · 8 Weeks · 7 Projects
+      </p>
+
+    <!-- <ul class="lesson-list">
+        <li class="lesson-item active">
+          <span class="lesson-title">01. Introduction to Full Stack</span>
+          <span class="lesson-duration">8 min</span>
+        </li>
+
+        <li class="lesson-item">
+          <span class="lesson-title">02. Backend Architecture</span>
+          <span class="lesson-duration">14 min</span>
+        </li>
+
+        <li class="lesson-item">
+          <span class="lesson-title">03. API Design</span>
+          <span class="lesson-duration">18 min</span>
+        </li>
+
+        <li class="lesson-item">
+          <span class="lesson-title">04. Database Modeling</span>
+          <span class="lesson-duration">22 min</span>
+        </li>
+
+        <li class="lesson-item">
+          <span class="lesson-title">05. Final Project</span>
+          <span class="lesson-duration">—</span>
+        </li>
+      </ul> -->
+
+    <!-- What You Will Learn -->
+    <div class="accordion lesson-accordion" id="courseLessons">
+
+  <!-- Lesson 01 -->
+  <div class="accordion-item lesson-item">
+    <h2 class="accordion-header">
+      <button
+        class="accordion-button lesson-toggle"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#lesson1"
+        aria-expanded="true"
+      >
+        <span>01. Introduction to Full Stack</span>
+        <span class="lesson-duration">8 min</span>
+      </button>
+    </h2>
+
+    <div id="lesson1" class="accordion-collapse collapse show">
+      <div class="accordion-body lesson-body">
+        Overview of the course, tools, workflow, and the architecture you’ll
+        build by the end.
+      </div>
+    </div>
+  </div>
+
+  <!-- Lesson 02 -->
+  <div class="accordion-item lesson-item">
+    <h2 class="accordion-header">
+      <button
+        class="accordion-button lesson-toggle collapsed"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#lesson2"
+      >
+        <span>02. Backend Architecture</span>
+        <span class="lesson-duration">14 min</span>
+      </button>
+    </h2>
+
+    <div id="lesson2" class="accordion-collapse collapse">
+      <div class="accordion-body lesson-body">
+        Designing scalable backend architecture, API layers, and service
+        boundaries.
+      </div>
+    </div>
+  </div>
+
+  <!-- Lesson 03 -->
+  <div class="accordion-item lesson-item">
+    <h2 class="accordion-header">
+      <button
+        class="accordion-button lesson-toggle collapsed"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#lesson3"
+      >
+        <span>03. Database Design & Modeling</span>
+        <span class="lesson-duration">18 min</span>
+      </button>
+    </h2>
+
+    <div id="lesson3" class="accordion-collapse collapse">
+      <div class="accordion-body lesson-body">
+        Schema design, relationships, indexing strategies, and performance
+        tradeoffs.
+      </div>
+    </div>
+  </div>
+
+  <!-- Lesson 04 -->
+  <div class="accordion-item lesson-item">
+    <h2 class="accordion-header">
+      <button
+        class="accordion-button lesson-toggle collapsed"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#lesson4"
+      >
+        <span>04. Authentication & Authorization</span>
+        <span class="lesson-duration">22 min</span>
+      </button>
+    </h2>
+
+    <div id="lesson4" class="accordion-collapse collapse">
+      <div class="accordion-body lesson-body">
+        Login flows, JWTs, role-based access control, and secure API practices.
+      </div>
+    </div>
+  </div>
+
+  <!-- Lesson 05 -->
+  <div class="accordion-item lesson-item">
+    <h2 class="accordion-header">
+      <button
+        class="accordion-button lesson-toggle collapsed"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#lesson5"
+      >
+        <span>05. Frontend Architecture</span>
+        <span class="lesson-duration">16 min</span>
+      </button>
+    </h2>
+
+    <div id="lesson5" class="accordion-collapse collapse">
+      <div class="accordion-body lesson-body">
+        Component structure, state management, and frontend scalability
+        patterns.
+      </div>
+    </div>
+  </div>
+
+  <!-- Lesson 06 -->
+  <div class="accordion-item lesson-item">
+    <h2 class="accordion-header">
+      <button
+        class="accordion-button lesson-toggle collapsed"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#lesson6"
+      >
+        <span>06. Deployment & Production Setup</span>
+        <span class="lesson-duration">12 min</span>
+      </button>
+    </h2>
+
+    <div id="lesson6" class="accordion-collapse collapse">
+      <div class="accordion-body lesson-body">
+        Environment variables, CI/CD basics, hosting, and production best
+        practices.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+    </section>
+
+    <!-- RIGHT: SIDEBAR -->
+    <aside class="course-sidebar">
+
+      <div class="sidebar-card course-preview">
+        <img src="https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://d15cw65ipctsrr.cloudfront.net/85/b322ebed824235921710c15744aa83/Image_1200x1200.png?auto=format%2C%20compress%2C%20enhance&dpr=3&w=320&h=180&fit=crop&q=50" class="course-image" />
+        <button class="btn btn-success w-100">Buy Now</button>
+      </div>
+
+      <div class="sidebar-card">
+        <div class="course-price">₹3,999</div>
+        <ul class="course-stats p-0">
+          <li>📺 24 Videos</li>
+          <li>🧪 8 Quizzes</li>
+          <li>📄 6 PDFs</li>
+          <li>🛠 7 Projects</li>
+        </ul>
+      </div>
+
+      <div class="sidebar-card">
+        <div class="instructor">
+          <div class="instructor-avatar"></div>
+          <div>
+            <div class="instructor-name">Rohit Verma</div>
+            <small class="text-muted">Senior Software Engineer</small>
+          </div>
+        </div>
+      </div>
+
+    </aside>
+
+  </main>
+
+  <!-- Footer -->
+  <div id="site-footer"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../script.js"></script>
+
+</body>
+</html>

@@ -128,8 +128,6 @@ footer span {
   font-size: clamp(4rem, 18vw, 14rem);
   font-weight: 600;
   line-height: 0.9;
-  margin: 4rem 0 2rem;
-
   background: linear-gradient(
     to bottom,
     #fff5e6 0%,
@@ -138,7 +136,7 @@ footer span {
     rgba(255, 245, 230, 0) 100%
   );
 
-  /* -webkit-background-clip: text; */
+  -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
