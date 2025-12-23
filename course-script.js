@@ -103,17 +103,30 @@ materials.innerHTML = `
 `;
 
 const actionBtn = document.getElementById("courseActionBtn");
+const addToCartBtn = document.getElementById("addToCartBtn");
 
 if (course.purchased) {
   actionBtn.textContent = "Go to Dashboard";
   actionBtn.onclick = () => {
     window.location.href = "/dashboard.html";
   };
+  if (addToCartBtn) {
+    addToCartBtn.style.display = "none";
+  }
 } else {
   actionBtn.textContent = "Buy Now";
   actionBtn.onclick = () => {
     alert("Payment coming soon 🚀");
   };
+  
+  if (addToCartBtn) {
+    addToCartBtn.style.display = "block";
+    addToCartBtn.onclick = () => {
+      if (window.cartManager) {
+        window.cartManager.addToCart(course);
+      }
+    };
+  }
 }
 
 /* ============================================================

@@ -56,32 +56,11 @@
 
       <!-- Static Cards -->
       <section class="container pb-5">
-  <div class="row g-4">
-
-    <!-- Course Card -->
-    <div class="col-md-6 col-lg-4">
-      <a href="course-detail.html" class="text-decoration-none">
-        <div class="course-card">
-          <img src="https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://d15cw65ipctsrr.cloudfront.net/85/b322ebed824235921710c15744aa83/Image_1200x1200.png?auto=format%2C%20compress%2C%20enhance&dpr=3&w=320&h=180&fit=crop&q=50" class="course-image" />
-
-          <div class="course-meta d-flex justify-content-between mt-2">
-            <span class="course-category">Web Development</span>
-            <span class="course-price">₹2,499</span>
-          </div>
-
-          <span class="course-level">Beginner</span>
-          <h4>Web Development Foundations</h4>
-          <p>Learn HTML, CSS, and JavaScript by building real-world layouts.</p>
+        <div class="row g-4" id="courses-container">
+          <!-- Courses will be dynamically inserted here -->
         </div>
-      </a>
-    </div>
+      </section>
 
-    <!-- Repeat cards -->
-  </div>
-</section>
-
-
-      <div id="courses-container"></div>
     </main>
 
     <!-- Dynamic footer -->
@@ -94,5 +73,84 @@
       crossorigin="anonymous"
     ></script>
     <script src="../script.js"></script>
+    
+    <!-- Courses Page Script -->
+    <script>
+      // Course data (same as course-script.js)
+      const courses = [
+        {
+          id: "web-dev",
+          title: "Web Development Foundations",
+          category: "Web Development",
+          level: "Beginner",
+          price: 2499,
+          description: "Learn HTML, CSS, and JavaScript by building real-world layouts.",
+          duration: "6 weeks",
+          projects: 5,
+          image: "https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://d15cw65ipctsrr.cloudfront.net/85/b322ebed824235921710c15744aa83/Image_1200x1200.png?auto=format%2C%20compress%2C%20enhance&dpr=3&w=320&h=180&fit=crop&q=50"
+        },
+        {
+          id: "js-projects",
+          title: "JavaScript Projects",
+          category: "JavaScript",
+          level: "Intermediate",
+          price: 2999,
+          description: "Build interactive apps and strengthen problem-solving skills.",
+          duration: "5 weeks",
+          projects: 6,
+          image: "https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://d15cw65ipctsrr.cloudfront.net/85/b322ebed824235921710c15744aa83/Image_1200x1200.png?auto=format%2C%20compress%2C%20enhance&dpr=3&w=320&h=180&fit=crop&q=50"
+        },
+        {
+          id: "fullstack",
+          title: "Full-Stack Applications",
+          category: "Full Stack",
+          level: "Advanced",
+          price: 3999,
+          description: "Create scalable applications using modern backend technologies.",
+          duration: "8 weeks",
+          projects: 7,
+          image: "https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://d15cw65ipctsrr.cloudfront.net/85/b322ebed824235921710c15744aa83/Image_1200x1200.png?auto=format%2C%20compress%2C%20enhance&dpr=3&w=320&h=180&fit=crop&q=50"
+        }
+      ];
+
+      function renderCourses() {
+        const container = document.getElementById('courses-container');
+        container.innerHTML = '';
+
+        courses.forEach(course => {
+          const courseCard = document.createElement('div');
+          courseCard.className = 'col-md-6 col-lg-4';
+          courseCard.innerHTML = `
+            <div class="course-card h-100">
+              <img src="${course.image}" class="course-image" alt="${course.title}" />
+              <div class="course-meta d-flex justify-content-between mt-2">
+                <span class="course-category">${course.category}</span>
+                <span class="course-price">₹${course.price}</span>
+              </div>
+              <span class="course-level">${course.level}</span>
+              <h5>${course.title}</h5>
+              <p class="text-muted small">${course.description}</p>
+              <div class="d-flex gap-2 mt-auto">
+                <a href="course-detail.html?id=${course.id}" class="btn btn-outline-primary flex-fill">View Details</a>
+                <button class="btn btn-success" onclick="addToCart('${course.id}')">
+                  <i class="bi bi-cart-plus"></i>
+                </button>
+              </div>
+            </div>
+          `;
+          container.appendChild(courseCard);
+        });
+      }
+
+      function addToCart(courseId) {
+        const course = courses.find(c => c.id === courseId);
+        if (course && window.cartManager) {
+          window.cartManager.addToCart(course);
+        }
+      }
+
+      // Initialize courses when DOM is loaded
+      document.addEventListener('DOMContentLoaded', renderCourses);
+    </script>
   </body>
 </html>

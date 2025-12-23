@@ -132,6 +132,99 @@ if (joinBtn) {
 
 
 /* ============================================================
+  CART FUNCTIONALITY
+   ============================================================ */
+
+/**
+ * Cart state management using localStorage
+ */
+class CartManager {
+  constructor() {
+    this.cart = this.loadCart();
+    this.updateCartUI();
+  }
+
+  loadCart() {
+    const savedCart = localStorage.getItem('educaterCart');
+    return savedCart ? JSON.parse(savedCart) : [];
+  }
+
+  saveCart() {
+    localStorage.setItem('educaterCart', JSON.stringify(this.cart));
+    this.updateCartUI();
+  }
+
+  addToCart(course) {
+    const existingItem = this.cart.find(item => item.id === course.id);
+    
+    if (existingItem) {
+      existingItem.quantity = (existingItem.quantity || 1) + 1;
+    } else {
+      this.cart.push({
+        ...course,
+        quantity: 1
+      });
+    }
+    
+    this.saveCart();
+    this.showNotification('Course added to cart!');
+  }
+
+  removeFromCart(courseId) {
+    this.cart = this.cart.filter(item => item.id !== courseId);
+    this.saveCart();
+    this.showNotification('Course removed from cart');
+  }
+
+  updateQuantity(courseId, quantity) {
+    const item = this.cart.find(item => item.id === courseId);
+    if (item) {
+      item.quantity = Math.max(1, parseInt(quantity) || 1);
+      this.saveCart();
+    }
+  }
+
+  getCartTotal() {
+    return this.cart.reduce((total, item) => {
+      return total + (item.price * (item.quantity || 1));
+    }, 0);
+  }
+
+  getCartCount() {
+    return this.cart.reduce((count, item) => count + (item.quantity || 1), 0);
+  }
+
+  clearCart() {
+    this.cart = [];
+    this.saveCart();
+  }
+
+  updateCartUI() {
+    const cartCount = document.getElementById('cart-count');
+    if (cartCount) {
+      const count = this.getCartCount();
+      cartCount.textContent = count;
+      cartCount.style.display = count > 0 ? 'inline' : 'none';
+    }
+  }
+
+  showNotification(message) {
+    const notification = document.createElement('div');
+    notification.className = 'alert alert-success position-fixed top-0 end-0 m-3';
+    notification.style.zIndex = '9999';
+    notification.textContent = message;
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+      notification.remove();
+    }, 3000);
+  }
+}
+
+// Initialize cart manager
+const cartManager = new CartManager();
+
+/* ============================================================
   FOOTER / BRAND OUTRO REVEAL ANIMATION
    ============================================================ */
 
@@ -156,7 +249,7 @@ if (revealText) {
 
 /* ============================================================
   FOOTER: TESTIMONIALS DATA
-   ============================================================ */
+============================================================ */
 
 /**
  * Demo Testimonials Data

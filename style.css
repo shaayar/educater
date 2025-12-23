@@ -98,6 +98,60 @@ footer span {
   border: 1px solid var(--border-color);
 }
 
+/* Cart Page Dark Theme Styles */
+.cart-section .table {
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+.cart-section .table th {
+  background-color: var(--bg-surface-soft);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+.cart-section .table td {
+  border-color: var(--border-color);
+}
+
+.cart-section .btn-outline-secondary {
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+.cart-section .btn-outline-secondary:hover {
+  background-color: var(--bg-surface-soft);
+  border-color: var(--accent-color);
+}
+
+.cart-section .form-control {
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+.cart-section .form-control:focus {
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 0.2rem rgba(46, 204, 113, 0.25);
+}
+
+.cart-section .table-hover tbody tr:hover {
+  background-color: var(--bg-surface-soft);
+}
+
+#empty-cart {
+  background-color: var(--bg-surface);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+}
+
+#empty-cart .text-muted {
+  color: var(--text-primary) !important;
+}
+
 .newsletter-input {
   padding: 0.6rem 0.9rem;
   min-width: 260px;
@@ -136,6 +190,7 @@ footer span {
     rgba(255, 245, 230, 0) 100%
   );
 
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }

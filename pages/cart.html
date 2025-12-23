@@ -17,7 +17,7 @@
     />
     <link rel="stylesheet" href="../style.css" />
   </head>
-  <body class="theme-light">
+  <body class="theme-dark">
 
     <!-- Dynamic header -->
     <div id="site-header"></div>
@@ -26,44 +26,40 @@
     <section class="cart-section">
       <div class="container py-5">
         <h2 class="mb-4">Your Shopping Cart</h2>
-        <div class="table-responsive">
-          <table class="table table-bordered align-middle">
-            <thead class="table-light">
-              <tr>
-                <th scope="col">Course</th>
-                <th scope="col">Price</th>
-                <th scope="col">Quantity</th>
-                <th scope="col">Total</th>
-                <th scope="col">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Introduction to Python</td>
-                <td>$49.99</td>
-                <td>1</td>
-                <td>$49.99</td>
-                <td>
-                  <button class="btn btn-danger btn-sm">Remove</button>
-                </td>
-              </tr>
-              <tr>
-                <td>Web Development Basics</td>
-                <td>$59.99</td>
-                <td>1</td>
-                <td>$59.99</td>
-                <td>
-                  <button class="btn btn-danger btn-sm">Remove</button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+        
+        <!-- Empty cart message -->
+        <div id="empty-cart" class="text-center py-5" style="display: none;">
+          <i class="bi bi-cart-x display-1 text-muted"></i>
+          <h3 class="mt-3">Your cart is empty</h3>
+          <p class="text-muted">Browse our courses and add some to your cart!</p>
+          <a href="courses.html" class="btn btn-success">Browse Courses</a>
         </div>
-        <div class="d-flex justify-content-end">
-          <h4>Total: $109.98</h4>
-        </div>
-        <div class="d-flex justify-content-end mt-3">
-          <button class="btn btn-primary btn-lg">Proceed to Checkout</button>
+
+        <!-- Cart content -->
+        <div id="cart-content">
+          <div class="table-responsive">
+            <table class="table table-bordered align-middle">
+              <thead class="table-light">
+                <tr>
+                  <th scope="col">Course</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">Total</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="cart-items">
+                <!-- Cart items will be dynamically inserted here -->
+              </tbody>
+            </table>
+          </div>
+          <div class="d-flex justify-content-between align-items-center">
+            <button id="clear-cart" class="btn btn-outline-danger">Clear Cart</button>
+            <div class="text-end">
+              <h4>Total: ₹<span id="cart-total">0</span></h4>
+              <button id="checkout-btn" class="btn btn-primary btn-lg mt-3">Proceed to Checkout</button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -76,5 +72,98 @@
       crossorigin="anonymous"
     ></script>
     <script src="../script.js"></script>
+    
+    <!-- Cart Page Specific Script -->
+    <script>
+      // Wait for cart manager to be initialized
+      document.addEventListener('DOMContentLoaded', function() {
+        renderCart();
+        
+        // Event listeners
+        document.getElementById('clear-cart')?.addEventListener('click', clearCart);
+        document.getElementById('checkout-btn')?.addEventListener('click', proceedToCheckout);
+      });
+
+      function renderCart() {
+        const cartItems = document.getElementById('cart-items');
+        const cartContent = document.getElementById('cart-content');
+        const emptyCart = document.getElementById('empty-cart');
+        const cartTotal = document.getElementById('cart-total');
+        
+        if (!cartManager.cart || cartManager.cart.length === 0) {
+          cartContent.style.display = 'none';
+          emptyCart.style.display = 'block';
+          return;
+        }
+        
+        cartContent.style.display = 'block';
+        emptyCart.style.display = 'none';
+        
+        cartItems.innerHTML = '';
+        
+        cartManager.cart.forEach(item => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>
+              <div class="d-flex align-items-center">
+                <img src="${item.image || '../assets/course-placeholder.jpg'}" alt="${item.title}" style="width: 60px; height: 60px; object-fit: cover; margin-right: 15px;">
+                <div>
+                  <h6 class="mb-1">${item.title}</h6>
+                  <small class="text-muted">${item.category || 'Course'}</small>
+                </div>
+              </div>
+            </td>
+            <td>₹${item.price}</td>
+            <td>
+              <div class="d-flex align-items-center">
+                <button class="btn btn-sm btn-outline-secondary" onclick="updateQuantity('${item.id}', ${item.quantity - 1})">-</button>
+                <input type="number" class="form-control form-control-sm mx-2" value="${item.quantity || 1}" min="1" max="10" style="width: 60px;" onchange="updateQuantity('${item.id}', this.value)">
+                <button class="btn btn-sm btn-outline-secondary" onclick="updateQuantity('${item.id}', ${item.quantity + 1})">+</button>
+              </div>
+            </td>
+            <td>₹${(item.price * (item.quantity || 1)).toFixed(2)}</td>
+            <td>
+              <button class="btn btn-danger btn-sm" onclick="removeFromCart('${item.id}')">
+                <i class="bi bi-trash"></i> Remove
+              </button>
+            </td>
+          `;
+          cartItems.appendChild(row);
+        });
+        
+        // Update total
+        cartTotal.textContent = cartManager.getCartTotal().toFixed(2);
+      }
+
+      function updateQuantity(courseId, quantity) {
+        cartManager.updateQuantity(courseId, quantity);
+        renderCart();
+      }
+
+      function removeFromCart(courseId) {
+        cartManager.removeFromCart(courseId);
+        renderCart();
+      }
+
+      function clearCart() {
+        if (confirm('Are you sure you want to clear your entire cart?')) {
+          cartManager.clearCart();
+          renderCart();
+        }
+      }
+
+      function proceedToCheckout() {
+        window.location.href = 'checkout.html';
+      }
+
+      // Re-render cart when storage changes (for multi-tab sync)
+      window.addEventListener('storage', function(e) {
+        if (e.key === 'educaterCart') {
+          cartManager.cart = cartManager.loadCart();
+          cartManager.updateCartUI();
+          renderCart();
+        }
+      });
+    </script>
   </body>
 </html>
