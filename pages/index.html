@@ -315,6 +315,18 @@
         opacity: 0;
       }
 
+      .testimonial-link, .small{
+        color: var(--accent-color);
+        border-color: var(--accent-color);
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+          
+          text-decoration-thickness: 2px;
+        }
+      }
+
       /* testing css */
       .course-card {
         border-radius: 16px;
@@ -450,7 +462,7 @@
       .tab-panel {
         display: none;
 
-        ul{
+        ul {
           color: var(--text-primary);
         }
       }
@@ -471,8 +483,8 @@
         gap: 1rem;
         align-items: center;
         height: auto;
-        div{
-          strong{
+        div {
+          strong {
             font-size: 1rem;
             color: var(--text-primary);
           }
@@ -539,7 +551,7 @@
                 Start Learning
               </a>
 
-              <a href="#how-it-works" class="btn btn-link ms-lg-3">
+              <a href="#how-it-works" class="btn small btn-lg ms-lg-3">
                 See how it works
               </a>
             </div>
@@ -616,145 +628,92 @@
           <a href="courses.html" class="small">View all courses →</a>
         </div>
 
-        <div class="row g-4" id="coursesGrid"></div>
+        <div class="row g-4">
+          <div class="col-md-6 col-lg-4">
+            <div class="course-card clickable">
+              <div class="course-media">
+                <img
+                  src="https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://d15cw65ipctsrr.cloudfront.net/85/b322ebed824235921710c15744aa83/Image_1200x1200.png?auto=format%2C%20compress%2C%20enhance&dpr=3&w=320&h=180&fit=crop&q=50"
+                  class="course-image"
+                />
+
+                <button class="preview-btn">
+                  <i class="bi bi-play-fill"></i> Preview
+                </button>
+              </div>
+
+              <div
+                class="course-meta d-flex justify-content-between align-items-center mt-2"
+              >
+                <span class="course-category">Web Development</span>
+                <span class="course-price">₹2,990</span>
+              </div>
+
+              <span class="course-level mt-2 d-inline-block">Beginner</span>
+              <h4>Web Development Foundations</h4>
+              <p>
+                Learn HTML, CSS, and JavaScript by building real-world layouts.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="course-card clickable">
+              <div class="course-media">
+                <img
+                  src="https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://d15cw65ipctsrr.cloudfront.net/85/b322ebed824235921710c15744aa83/Image_1200x1200.png?auto=format%2C%20compress%2C%20enhance&dpr=3&w=320&h=180&fit=crop&q=50"
+                  class="course-image"
+                />
+
+                <button class="preview-btn">
+                  <i class="bi bi-play-fill"></i> Preview
+                </button>
+              </div>
+
+              <div
+                class="course-meta d-flex justify-content-between align-items-center mt-2"
+              >
+                <span class="course-category">Web Development</span>
+                <span class="course-price">₹2,990</span>
+              </div>
+
+              <span class="course-level mt-2 d-inline-block">Beginner</span>
+              <h4>Web Development Foundations</h4>
+              <p>
+                Learn HTML, CSS, and JavaScript by building real-world layouts.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="course-card clickable">
+              <div class="course-media">
+                <img
+                  src="https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://d15cw65ipctsrr.cloudfront.net/85/b322ebed824235921710c15744aa83/Image_1200x1200.png?auto=format%2C%20compress%2C%20enhance&dpr=3&w=320&h=180&fit=crop&q=50"
+                  class="course-image"
+                />
+
+                <button class="preview-btn">
+                  <i class="bi bi-play-fill"></i> Preview
+                </button>
+              </div>
+
+              <div
+                class="course-meta d-flex justify-content-between align-items-center mt-2"
+              >
+                <span class="course-category">Web Development</span>
+                <span class="course-price">₹2,990</span>
+              </div>
+
+              <span class="course-level mt-2 d-inline-block">Beginner</span>
+              <h4>Web Development Foundations</h4>
+              <p>
+                Learn HTML, CSS, and JavaScript by building real-world layouts.
+              </p>
+            </div>
+          </div>
+
+        </div>
       </div>
     </section>
-
-    <script>
-      /* ============================================================
-  DYNAMIC COURSE GRID RENDERING
-   ============================================================ */
-
-      /**
-       * Dynamic course data
-       */
-
-      const courses = [
-        {
-          id: "web-dev",
-          title: "Web Development Foundations",
-          category: "Web Development",
-          level: "Beginner",
-          price: 2499,
-          description:
-            "Learn HTML, CSS, and JavaScript by building real-world layouts.",
-          duration: "6 weeks",
-          projects: 5,
-          materials: {
-            videos: 18,
-            quizzes: 6,
-            pdfs: 4,
-          },
-          instructor: {
-            name: "Aarav Sharma",
-            role: "Senior Frontend Engineer",
-          },
-          image:
-            "https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://d15cw65ipctsrr.cloudfront.net/85/b322ebed824235921710c15744aa83/Image_1200x1200.png?auto=format%2C%20compress%2C%20enhance&dpr=3&w=320&h=180&fit=crop&q=50",
-          previewVideo: "../assets/preview-web.mp4",
-          purchased: false,
-        },
-
-        {
-          id: "js-projects",
-          title: "JavaScript Projects",
-          category: "JavaScript",
-          level: "Intermediate",
-          price: 2999,
-          description:
-            "Build interactive apps and strengthen problem-solving skills.",
-          duration: "5 weeks",
-          projects: 6,
-          materials: {
-            videos: 15,
-            quizzes: 5,
-            pdfs: 3,
-          },
-          instructor: {
-            name: "Neha Patel",
-            role: "Frontend Developer",
-          },
-          image:
-            "https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://d15cw65ipctsrr.cloudfront.net/85/b322ebed824235921710c15744aa83/Image_1200x1200.png?auto=format%2C%20compress%2C%20enhance&dpr=3&w=320&h=180&fit=crop&q=50",
-          previewVideo: "../assets/preview-js.mp4",
-          purchased: false,
-        },
-
-        {
-          id: "fullstack",
-          title: "Full-Stack Applications",
-          category: "Full Stack",
-          level: "Advanced",
-          price: 3999,
-          description:
-            "Create scalable applications using modern backend technologies.",
-          duration: "8 weeks",
-          projects: 7,
-          materials: {
-            videos: 24,
-            quizzes: 8,
-            pdfs: 6,
-          },
-          instructor: {
-            name: "Rohit Verma",
-            role: "Senior Software Engineer",
-          },
-          image:
-            "https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://d15cw65ipctsrr.cloudfront.net/85/b322ebed824235921710c15744aa83/Image_1200x1200.png?auto=format%2C%20compress%2C%20enhance&dpr=3&w=320&h=180&fit=crop&q=50",
-          previewVideo: "../assets/preview-fullstack.mp4",
-          purchased: false,
-        },
-      ];
-
-      /**
-       * Renders course cards dynamically into the course grid
-       */
-
-      const coursesGrid = document.getElementById("coursesGrid");
-      console.log("Caught the grid");
-
-      if (coursesGrid) {
-        coursesGrid.innerHTML = courses
-          .map(
-            (course) => `
-    <div class="col-md-6 col-lg-4">
-      <div
-        class="course-card clickable"
-        data-id="${course.id}"
-        data-title="${course.title}"
-        data-category="${course.category}"
-        data-level="${course.level}"
-        data-price="₹${course.price}"
-        data-description="${course.description}"
-        data-duration="${course.duration}"
-        data-projects="${course.projects}"
-        data-video="${course.previewVideo}"
-      >
-        <div class="course-media">
-          <img src="${course.image}" class="course-image" />
-
-          <button class="preview-btn">
-            <i class="bi bi-play-fill"></i> Preview
-          </button>
-        </div>
-
-        <div class="course-meta d-flex justify-content-between align-items-center mt-2">
-          <span class="course-category">${course.category}</span>
-          <span class="course-price">₹${course.price}</span>
-        </div>
-
-        <span class="course-level mt-2 d-inline-block">${course.level}</span>
-        <h4>${course.title}</h4>
-        <p>${course.description}</p>
-      </div>
-    </div>
-  `
-          )
-          .join("");
-      } else {
-        console.error("Courses Grid not found!!");
-      }
-    </script>
 
     <!-- Why this site? -->
     <section class="why-platform-section">
@@ -826,7 +785,7 @@
               Frontend Developer (Student)
             </p>
 
-            <a href="#" class="testimonial-link"> Read full story → </a>
+            <a href="#" class="testimonial-link"> Read full story </a>
           </div>
 
           <div class="testimonial-avatar">
@@ -907,7 +866,7 @@
               <!-- RIGHT: content -->
               <div class="preview-content">
                 <div class="preview-header">
-                  <h3 id="modalTitle"></h3>
+                  <h3 id="modalTitle">Web Development</h3>
                   <div class="rating">★★★★★</div>
                 </div>
 
@@ -928,7 +887,9 @@
 
                 <div class="preview-body">
                   <div class="tab-panel active" id="overview">
-                    <p id="modalDescription"></p>
+                    <p id="modalDescription">
+                      Hello World
+                    </p>
                   </div>
 
                   <div class="tab-panel" id="curriculum">
@@ -976,6 +937,5 @@
       crossorigin="anonymous"
     ></script>
     <script src="../script.js"></script>
-    <script src="../course-script.js"></script>
   </body>
 </html>

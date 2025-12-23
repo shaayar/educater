@@ -347,13 +347,6 @@ const courseModal = new bootstrap.Modal(
 
 courseCards.forEach(card => {
   card.addEventListener("click", () => {
-    // Populate modal content
-    document.getElementById("modalTitle").textContent = card.dataset.title;
-    document.getElementById("modalDescription").textContent = card.dataset.description;
-    document.getElementById("modalCategory").textContent = card.dataset.category;
-    document.getElementById("modalPrice").textContent = card.dataset.price;
-
-    currentCourseId = card.dataset.id;
 
     const video = document.getElementById("modalVideo");
     if (video) {
@@ -363,10 +356,6 @@ courseCards.forEach(card => {
     // Show modal
     courseModal.show();
   });
-});
-
-document.getElementById("joinCourseBtn").addEventListener("click", () => {
-  window.location.href = `/pages/course-details.html?id=${currentCourseId}`;
 });
 
 
