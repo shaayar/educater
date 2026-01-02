@@ -170,8 +170,6 @@ footer span {
 
 .brand-outro {
   background-color: var(--bg-surface);
-  /* color: var(--text-primary); */
-  min-height: 50vh;
   display: flex;
   align-items: flex-end;
   overflow: hidden;
